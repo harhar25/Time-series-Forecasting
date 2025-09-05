@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_file, url_for, session
+from flask import Flask, render_template, request, jsonify, send_file, url_for, session, redirect, url_for
 import matplotlib
 matplotlib.use('Agg')  # Use Agg backend for non-interactive mode
 import matplotlib.pyplot as plt
@@ -219,19 +219,40 @@ def load_and_train_initial_data():
         print(f'Error training models: {str(e)}')
         return False
 
-@app.route('/')
-def index():
-    # Check if models are trained
-    if not models:
-        success = load_and_train_initial_data()
-        if not success:
-            return 'Error: Could not train initial models', 500
-    
-    return render_template('index.html', 
-                           departments=DEPARTMENTS,
-                           year_levels=YEAR_LEVELS)
+@app.route("/")
+def frontface():
+    return render_template("frontface.html")
 
-@app.route('/get_filters')
+@app.route("/select_department", methods=["POST"])
+def select_department():
+    department = request.form.get("department")
+    if department == "BED":
+        return redirect(url_for("bed_filter"))
+    elif department == "CED":
+        return redirect(url_for("ced_filter"))
+    return redirect(url_for("frontface"))
+
+@app.route('/comparefilter')
+def comparefilter():
+    return render_template('comparefilter.html')
+
+@app.route('/compare_results', methods=['POST'])
+def compare_results():
+    department = request.form['department']
+    course1 = request.form['course1']
+    course2 = request.form['course2']
+    # TODO: add logic to generate comparison results
+    return f"Comparing {course1} vs {course2} in {department}"
+
+@app.route("/bed_filter")
+def bed_filter():
+    return render_template("BEDfilter.html")
+
+@app.route("/ced_filter")
+def ced_filter():
+    return render_template("CEDfilter.html")
+
+@app.route('/get_filters') 
 def get_filters():
     try:
         filters = {

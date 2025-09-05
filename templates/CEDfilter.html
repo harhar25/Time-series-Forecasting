@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BED Filters</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Your Styles -->
+  <style>
+    /* Insert your full style block here */
+    :root {
+      --primary-color: #4e73df;
+      --secondary-color: #858796;
+      --success-color: #1cc88a;
+      --bed-color: #e74a3b;
+      --ced-color: #1cc88a;
+    }
+    body { background-color: #f8f9fc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .dashboard-card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; background: white; border: none; margin-bottom: 1.5rem; }
+    .dashboard-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .card-title { color: var(--primary-color); font-weight: 600; margin-bottom: 1.5rem; }
+    .filter-label { font-weight: 600; color: var(--secondary-color); margin-bottom: 0.5rem; }
+    .predict-btn { background: var(--success-color); color: white; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; border: none; }
+    .predict-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(28,200,138,0.4); }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card dashboard-card">
+        <div class="card-body">
+            <h5 class="card-title">CED Filters</h5>
+          <div class="row">
+
+            <!-- Course Filter -->
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label class="filter-label">Course</label>
+                <select class="form-control" id="bedCourse">
+                  <option value="">-- Select Course --</option>
+                  <option value="BSCS">BSCS</option>
+                  <option value="BSIT">BSIT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Year Filter -->
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label class="filter-label">Year</label>
+                <select class="form-control" id="bedYear">
+                  <option value="">-- Select Year --</option>
+                  <option value="2018-2019">2018 - 2019</option>
+                  <option value="2020-2021">2020 - 2021</option>
+                  <option value="2022-2023">2022 - 2023</option>
+                  <option value="2024-2025">2024 - 2025</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Semester Filter -->
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label class="filter-label">Semester</label>
+                <select class="form-control" id="bedSemester">
+                  <option value="">-- Select Semester --</option>
+                  <option value="1">First</option>
+                  <option value="2">Second</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Generate Button -->
+          <div class="row mt-3">
+            <div class="col-12">
+              <button class="predict-btn" onclick="predict('CED')">Generate Forecast</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
